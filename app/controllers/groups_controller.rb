@@ -22,7 +22,7 @@ class GroupsController < ApplicationController
     @group.user = current_user
 
     if @group.save
-      current_user.join!(@gurop)
+      current_user.join!(@group)
        redirect_to groups_path
     else
       render :new
@@ -38,13 +38,11 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    @group = Group.find(params[:id])
     @group.destroy
     flash[:alert] = "Group deleted"
     redirect_to groups_path
   end
-
-
-
 
 def join
   @group = Group.find(params[:id])
